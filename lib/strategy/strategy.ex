@@ -45,20 +45,6 @@ defmodule ClusterEcs.Strategy do
     {:ok, load(state)}
   end
 
-  # libcluster ~> 2.0
-  def init(opts) do
-    state = %State{
-      topology: Keyword.fetch!(opts, :topology),
-      connect: Keyword.fetch!(opts, :connect),
-      disconnect: Keyword.fetch!(opts, :disconnect),
-      list_nodes: Keyword.fetch!(opts, :list_nodes),
-      config: Keyword.fetch!(opts, :config),
-      meta: MapSet.new([])
-    }
-
-    {:ok, load(state)}
-  end
-
   @impl true
   def handle_info(:timeout, state) do
     handle_info(:load, state)
